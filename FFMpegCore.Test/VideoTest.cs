@@ -43,7 +43,7 @@ namespace FFMpegCore.Test
             Assert.IsTrue(success);
         }
 
-        [TestMethod, Timeout(10000)]
+        [TestMethod, Timeout(30000)]
         public void Video_ToMP4_YUV444p()
         {
             using var outputFile = new TemporaryFile($"out{VideoType.Mp4.Extension}");
@@ -85,7 +85,7 @@ namespace FFMpegCore.Test
             Assert.IsTrue(success);
         }
 
-        [DataTestMethod, Timeout(10000)]
+        [DataTestMethod, Timeout(30000)]
         [DataRow(System.Drawing.Imaging.PixelFormat.Format24bppRgb)]
         [DataRow(System.Drawing.Imaging.PixelFormat.Format32bppArgb)]
         public void Video_ToMP4_Args_Pipe(System.Drawing.Imaging.PixelFormat pixelFormat)
@@ -240,7 +240,7 @@ namespace FFMpegCore.Test
         }
 
 
-        [TestMethod, Timeout(10000)]
+        [TestMethod, Timeout(30000)]
         public async Task Video_ToMP4_Args_StreamOutputPipe_Async()
         {
             await using var ms = new MemoryStream();
@@ -253,7 +253,7 @@ namespace FFMpegCore.Test
                 .ProcessAsynchronously();
         }
 
-        [TestMethod, Timeout(10000)]
+        [TestMethod, Timeout(30000)]
         public async Task TestDuplicateRun()
         {
             FFMpegArguments
@@ -269,7 +269,7 @@ namespace FFMpegCore.Test
             File.Delete("temporary.mp4");
         }
 
-        [TestMethod, Timeout(10000)]
+        [TestMethod, Timeout(30000)]
         public void TranscodeToMemoryStream_Success()
         {
             using var output = new MemoryStream();
@@ -314,7 +314,7 @@ namespace FFMpegCore.Test
             Assert.IsTrue(success);
         }
 
-        [DataTestMethod, Timeout(10000)]
+        [DataTestMethod, Timeout(30000)]
         [DataRow(System.Drawing.Imaging.PixelFormat.Format24bppRgb)]
         [DataRow(System.Drawing.Imaging.PixelFormat.Format32bppArgb)]
         public async Task Video_ToTS_Args_Pipe(System.Drawing.Imaging.PixelFormat pixelFormat)
@@ -346,7 +346,7 @@ namespace FFMpegCore.Test
             Assert.IsTrue(success);
         }
 
-        [DataTestMethod, Timeout(10000)]
+        [DataTestMethod, Timeout(30000)]
         [DataRow(System.Drawing.Imaging.PixelFormat.Format24bppRgb)]
         [DataRow(System.Drawing.Imaging.PixelFormat.Format32bppArgb)]
         // [DataRow(PixelFormat.Format48bppRgb)]
@@ -367,7 +367,7 @@ namespace FFMpegCore.Test
             Assert.AreEqual((int)VideoSize.Ed, analysis.PrimaryVideoStream!.Width);
         }
 
-        [TestMethod, Timeout(10000)]
+        [TestMethod, Timeout(30000)]
         public void Scale_Mp4_Multithreaded()
         {
             using var outputFile = new TemporaryFile($"out{VideoType.Mp4.Extension}");
@@ -381,7 +381,7 @@ namespace FFMpegCore.Test
             Assert.IsTrue(success);
         }
 
-        [DataTestMethod, Timeout(10000)]
+        [DataTestMethod, Timeout(30000)]
         [DataRow(System.Drawing.Imaging.PixelFormat.Format24bppRgb)]
         [DataRow(System.Drawing.Imaging.PixelFormat.Format32bppArgb)]
         // [DataRow(PixelFormat.Format48bppRgb)]
@@ -398,7 +398,7 @@ namespace FFMpegCore.Test
             Assert.IsTrue(success);
         }
 
-        [TestMethod, Timeout(10000)]
+        [TestMethod, Timeout(30000)]
         public void Video_Snapshot_InMemory()
         {
             var input = FFProbe.Analyse(TestResources.Mp4Video);
@@ -409,7 +409,7 @@ namespace FFMpegCore.Test
             Assert.AreEqual(bitmap.RawFormat, ImageFormat.Png);
         }
 
-        [TestMethod, Timeout(10000)]
+        [TestMethod, Timeout(30000)]
         public void Video_Snapshot_PersistSnapshot()
         {
             var outputPath = new TemporaryFile("out.png");
@@ -423,7 +423,7 @@ namespace FFMpegCore.Test
             Assert.AreEqual(bitmap.RawFormat, ImageFormat.Png);
         }
 
-        [TestMethod, Timeout(10000)]
+        [TestMethod, Timeout(30000)]
         public void Video_Join()
         {
             var inputCopy = new TemporaryFile("copy-input.mp4");
@@ -609,7 +609,7 @@ namespace FFMpegCore.Test
             Assert.IsFalse(result);
         }
 
-        [TestMethod, Timeout(10000)]
+        [TestMethod, Timeout(30000)]
         public async Task Video_Cancel_Async_With_Timeout()
         {
             var outputFile = new TemporaryFile("out.mp4");
@@ -639,7 +639,7 @@ namespace FFMpegCore.Test
             Assert.AreEqual("aac", outputInfo.PrimaryAudioStream!.CodecName);
         }
 
-        [TestMethod, Timeout(10000)]
+        [TestMethod, Timeout(30000)]
         public async Task Video_Cancel_CancellationToken_Async()
         {
             var outputFile = new TemporaryFile("out.mp4");
@@ -709,11 +709,11 @@ namespace FFMpegCore.Test
             Assert.ThrowsException<OperationCanceledException>(() => task.ProcessSynchronously());
         }
 
-        [TestMethod, Timeout(10000)]
+        [TestMethod, Timeout(30000)]
         public async Task Video_Cancel_CancellationToken_Async_With_Timeout()
         {
             var outputFile = new TemporaryFile("out.mp4");
-
+            
             var cts = new CancellationTokenSource();
 
             var task = FFMpegArguments
